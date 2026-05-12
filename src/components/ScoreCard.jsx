@@ -1,6 +1,7 @@
 import React from 'react';
 import { Activity } from 'lucide-react';
 import { getScoreTier } from '../constants/scoring.js';
+import ActivationChecklist from './ActivationChecklist.jsx';
 
 // Mapeamento de colorKey → classes Tailwind
 const COLOR_MAP = {
@@ -10,7 +11,7 @@ const COLOR_MAP = {
   green: { text: 'text-green-500', bg: 'bg-green-50', stroke: 'stroke-green-500' },
 };
 
-export default function ScoreCard({ score }) {
+export default function ScoreCard({ score, breakdown }) {
   const tier = getScoreTier(score);
   const colors = COLOR_MAP[tier.colorKey] ?? COLOR_MAP.red;
 
@@ -67,6 +68,8 @@ export default function ScoreCard({ score }) {
       <div className={`px-6 py-2 rounded-full border ${colors.bg} border-transparent ${colors.text} font-bold text-sm tracking-wide uppercase shadow-sm transition-all duration-300`}>
         {tier.label}
       </div>
+
+      <ActivationChecklist breakdown={breakdown} />
     </div>
   );
 }
